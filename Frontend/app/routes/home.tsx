@@ -1,13 +1,19 @@
+import IndexHero from "~/components/HomePage/section1";
 import type { Route } from "./+types/home";
 import Navbar from "~/common/navbar";
 
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "TemuIn | Home" },
-    { name: "description", content: "Welcome to React Router!" },
+    { name: "Home", content: "Welcome to TemuIn!" },
   ];
 }
 
 export default function Home() {
-  return <Navbar />;
+  return (
+    <>
+      <Navbar />
+      <IndexHero />
+    </>
+  );
 }
