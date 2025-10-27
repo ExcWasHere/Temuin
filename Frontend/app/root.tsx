@@ -31,6 +31,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script
+          type="module"
+          src="https://unpkg.com/@splinetool/viewer@1.10.88/build/spline-viewer.js"
+        ></script>
       </head>
       <body>
         {children}
