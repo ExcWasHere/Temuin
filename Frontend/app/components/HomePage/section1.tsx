@@ -82,7 +82,7 @@ export default function IndexHero() {
 
               {/* Subtitle */}
               <p className="text-gray-600 text-lg lg:text-xl leading-relaxed max-w-lg text-justify">
-                Mau tau lokasi Warkop lokal? Nyari Makanan hidden gem? atau Lagi cari bakso legend, tapi gatau infonya? Coba TemuIn aja,
+                Mau tau lokasi barber lokal? Nyari Makanan hidden gem? atau Lagi cari laundry terdekat?,  Ayo coba TemuIn aja,
                 TemuIn cocok buat kamu!
               </p>
 
