@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "dev": "react-router dev",
+    "dev": "pnpm run start-dev",
+    "start-dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
@@ -20,15 +21,15 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.9.2",
-    "@tailwindcss/vite": "^4.1.13",
-    "@types/node": "^22",
+    "@react-router/dev": "^7.9.4",
+    "@tailwindcss/vite": "^4.1.16",
+    "@types/node": "^22.18.12",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@types/three": "^0.180.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
-    "vite": "^7.1.7",
+    "vite": "^7.1.12",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
