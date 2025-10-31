@@ -51,7 +51,7 @@ export default function IndexHero() {
               <style>{`
                 .temuinText {
                 opacity: 0;
-                background-image: linear-gradient(to right, white, #7dd3fc, #2563eb, #22d3ee, #0ea5e9);
+                background-image: linear-gradient(to right, #7dd3fc, #2563eb, #22d3ee, #0ea5e9);
                 background-size: 200% auto;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
