@@ -1,6 +1,9 @@
 import IndexHero from "~/components/HomePage/section1";
 import type { Route } from "./+types/home";
 import Navbar from "~/common/navbar";
+import IndexFeatures from "~/components/HomePage/section2";
+import IndexIntroduction from "~/components/HomePage/section3";
+import Footer from "~/common/footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,6 +17,9 @@ export default function Home() {
     <>
       <Navbar />
       <IndexHero />
+      <IndexFeatures />
+      <IndexIntroduction />
+      <Footer />
     </>
   );
 }

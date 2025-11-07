@@ -51,7 +51,7 @@ export default function IndexHero() {
               <style>{`
                 .temuinText {
                 opacity: 0;
-                background-image: linear-gradient(to right, white, #7dd3fc, #2563eb, #22d3ee, #0ea5e9);
+                background-image: linear-gradient(to right, #7dd3fc, #2563eb, #22d3ee, #0ea5e9);
                 background-size: 200% auto;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -82,7 +82,7 @@ export default function IndexHero() {
 
               {/* Subtitle */}
               <p className="text-gray-600 text-lg lg:text-xl leading-relaxed max-w-lg text-justify">
-                Mau tau lokasi Warkop lokal? Nyari Makanan hidden gem? atau Lagi cari bakso legend, tapi gatau infonya? Coba TemuIn aja,
+                Mau tau lokasi barber lokal? Nyari Makanan hidden gem? atau Lagi cari laundry terdekat?,  Ayo coba TemuIn aja,
                 TemuIn cocok buat kamu!
               </p>
 
