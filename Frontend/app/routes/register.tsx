@@ -1,5 +1,5 @@
-import type { Route } from "./+types/login";
-import LoginPage from "~/components/auth/login";
+import RegisterPage from "~/components/auth/register";
+import type { Route } from "./+types/register";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,7 +11,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
-      <LoginPage />
+      <RegisterPage />
     </>
   );
 }
