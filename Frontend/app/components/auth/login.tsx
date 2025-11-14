@@ -27,13 +27,30 @@ export default function LoginPage() {
     return () => clearInterval(typingInterval);
   }, []);
 
-const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-        setIsLoading(false);
-        alert('Login berhasil! 🎉');
-    }, 1500);
+const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  setIsLoading(true);
+  try {
+    const res = await fetch("http://localhost:3000/auth/login", {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify({ emailOrUsername: email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Login gagal');
+    localStorage.setItem('access_token', data.access_token);
+    if (data.user?.role) localStorage.setItem('role', data.user.role);
+    if (data.user?.role === 'pengusaha') {
+      window.location.href = '/dashboard-umkm';
+    } else {
+      window.location.href = '/dashboard-user';
+    }
+  } catch (err: any) {
+    console.error(err);
+    alert(err.message || 'Login gagal');
+  } finally {
+    setIsLoading(false);
+  }
 };
 
   return (
