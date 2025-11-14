@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react";
+import React, { useState, useEffect, type JSX } from "react";
 import {
   Search,
   MapPin,
@@ -44,13 +44,13 @@ interface Category {
 const umkmData: UMKM[] = [
   {
     id: 1,
-    name: "Warung Kopi Sederhana",
+    name: "Warung Kopi Brewok",
     category: "Makanan & Minuman",
     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
-    rating: 4.8,
+    rating: 4.6,
     reviews: 124,
     distance: "0.5 km",
-    address: "Jl. Veteran No. 12, Malang",
+    address: "Jl. Trs.Candi Mendut No.37, Kota Malang, Jawa Timur",
     isOpen: true,
     description: "Kopi lokal dengan cita rasa autentik",
     phone: "0812-3456-7890",
@@ -151,9 +151,21 @@ const umkmData: UMKM[] = [
 
 const categories: Category[] = [
   { name: "Semua", icon: Store, colorClasses: "from-sky-400 to-sky-500" },
-  { name: "Makanan & Minuman", icon: Utensils, colorClasses: "from-orange-400 to-orange-500" },
-  { name: "Jasa", icon: Scissors, colorClasses: "from-purple-400 to-purple-500" },
-  { name: "Retail", icon: ShoppingBag, colorClasses: "from-green-400 to-green-500" },
+  {
+    name: "Makanan & Minuman",
+    icon: Utensils,
+    colorClasses: "from-orange-400 to-orange-500",
+  },
+  {
+    name: "Jasa",
+    icon: Scissors,
+    colorClasses: "from-purple-400 to-purple-500",
+  },
+  {
+    name: "Retail",
+    icon: ShoppingBag,
+    colorClasses: "from-green-400 to-green-500",
+  },
 ];
 
 function getCategoryIcon(categoryName: string): IconComponent {
@@ -169,8 +181,8 @@ export default function UserDashboard(): JSX.Element {
   );
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const [selectedUMKM, setSelectedUMKM] = useState<UMKM | null>(null);
-
-  // updated: include 'menu' as tab after jadwal
+  const [username, setUsername] = useState<string | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const [detailTab, setDetailTab] = useState<
     "overview" | "jadwal" | "menu" | "ulasan" | "kontak"
   >("overview");
@@ -181,13 +193,42 @@ export default function UserDashboard(): JSX.Element {
       q === "" ||
       umkm.name.toLowerCase().includes(q) ||
       umkm.description.toLowerCase().includes(q);
-    const matchesCategory = selectedCategory === "Semua" || umkm.category === selectedCategory;
+    const matchesCategory =
+      selectedCategory === "Semua" || umkm.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   const toggleFavorite = (id: number) => {
-    setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]));
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]
+    );
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) return;
+    fetch("http://localhost:3000/auth/me",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then(async (res) => {
+        if (!res.ok) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("role");
+          setUsername(null);
+          setRole(null);
+          return;
+        }
+        const data = await res.json();
+        setUsername(data.username || data.name || data.email);
+        setRole(data.role || localStorage.getItem("role"));
+      })
+      .catch(() => {
+        setUsername(null);
+        setRole(localStorage.getItem("role"));
+      });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-purple-50">
@@ -219,7 +260,10 @@ export default function UserDashboard(): JSX.Element {
                 <div className="w-8 h-8 bg-gradient-to-br from-sky-400 to-blue-500 rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-white" />
                 </div>
-                <span className="font-semibold text-gray-700 hidden sm:block">Pengguna</span>
+                <span className="font-semibold text-gray-700 hidden sm:block">
+                  {username ?? "Pengguna"}
+                </span>
+
                 <ChevronDown className="w-4 h-4 text-gray-600" />
               </button>
 
@@ -244,8 +288,12 @@ export default function UserDashboard(): JSX.Element {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Hai, Selamat Datang! 👋</h2>
-          <p className="text-gray-600">Temukan UMKM favoritmu di sekitar Malang</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+            Hai, Selamat Datang! 👋
+          </h2>
+          <p className="text-gray-600">
+            Temukan UMKM favoritmu di sekitar Malang
+          </p>
         </div>
 
         {/* Search Bar */}
@@ -298,7 +346,7 @@ export default function UserDashboard(): JSX.Element {
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer border border-sky-100"
                 onClick={() => {
                   setSelectedUMKM(umkm);
-                  setDetailTab("overview"); // reset tab to overview tiap kali buka
+                  setDetailTab("overview");
                 }}
               >
                 {/* Image */}
@@ -316,13 +364,17 @@ export default function UserDashboard(): JSX.Element {
                       }}
                       className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all shadow-lg"
                     >
-                      <Heart className={`w-5 h-5 ${isFav ? "fill-current text-red-500" : "text-gray-600"}`} />
+                      <Heart
+                        className={`w-5 h-5 ${isFav ? "fill-current text-red-500" : "text-gray-600"}`}
+                      />
                     </button>
                   </div>
                   <div className="absolute top-3 left-3">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        umkm.isOpen ? "bg-green-500 text-white" : "bg-red-500 text-white"
+                        umkm.isOpen
+                          ? "bg-green-500 text-white"
+                          : "bg-red-500 text-white"
                       }`}
                     >
                       {umkm.isOpen ? "Buka" : "Tutup"}
@@ -341,21 +393,31 @@ export default function UserDashboard(): JSX.Element {
                   <div className="flex items-center gap-2 mb-3">
                     <div className="flex items-center gap-1 px-2 py-1 bg-sky-50 rounded-lg">
                       <CategoryIcon className="w-4 h-4 text-sky-600" />
-                      <span className="text-xs font-semibold text-sky-600">{umkm.category}</span>
+                      <span className="text-xs font-semibold text-sky-600">
+                        {umkm.category}
+                      </span>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">{umkm.description}</p>
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                    {umkm.description}
+                  </p>
 
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="font-bold text-gray-800">{umkm.rating}</span>
-                      <span className="text-sm text-gray-500">({umkm.reviews})</span>
+                      <span className="font-bold text-gray-800">
+                        {umkm.rating}
+                      </span>
+                      <span className="text-sm text-gray-500">
+                        ({umkm.reviews})
+                      </span>
                     </div>
                     <div className="flex items-center gap-1 text-gray-600">
                       <MapPin className="w-4 h-4" />
-                      <span className="text-sm font-semibold">{umkm.distance}</span>
+                      <span className="text-sm font-semibold">
+                        {umkm.distance}
+                      </span>
                     </div>
                   </div>
 
@@ -377,8 +439,12 @@ export default function UserDashboard(): JSX.Element {
         {filteredUMKM.length === 0 && (
           <div className="text-center py-16">
             <Store className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">Tidak ada UMKM yang ditemukan</p>
-            <p className="text-gray-400 text-sm">Coba ubah kata kunci atau filter pencarian</p>
+            <p className="text-gray-500 text-lg">
+              Tidak ada UMKM yang ditemukan
+            </p>
+            <p className="text-gray-400 text-sm">
+              Coba ubah kata kunci atau filter pencarian
+            </p>
           </div>
         )}
       </div>
@@ -406,20 +472,32 @@ export default function UserDashboard(): JSX.Element {
             <div className="relative bg-gradient-to-br from-purple-600 to-blue-500 p-6">
               <div className="flex items-center gap-6">
                 <div className="w-28 h-28 rounded-2xl bg-white/20 flex items-center justify-center overflow-hidden">
-                  <img src={selectedUMKM.image} alt={selectedUMKM.name} className="w-full h-full object-cover" />
+                  <img
+                    src={selectedUMKM.image}
+                    alt={selectedUMKM.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
 
                 <div className="flex-1 text-white">
                   <h1 className="text-3xl font-bold">{selectedUMKM.name}</h1>
-                  <p className="text-sm opacity-90 mt-1">{selectedUMKM.category} • {selectedUMKM.address}</p>
+                  <p className="text-sm opacity-90 mt-1">
+                    {selectedUMKM.category} • {selectedUMKM.address}
+                  </p>
 
                   <div className="flex items-center gap-3 mt-4">
                     <div className="flex items-center gap-1">
                       <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                      <span className="font-semibold">{selectedUMKM.rating}</span>
-                      <span className="opacity-90">({selectedUMKM.reviews} ulasan)</span>
+                      <span className="font-semibold">
+                        {selectedUMKM.rating}
+                      </span>
+                      <span className="opacity-90">
+                        ({selectedUMKM.reviews} ulasan)
+                      </span>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-sm ${selectedUMKM.isOpen ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm ${selectedUMKM.isOpen ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                    >
                       {selectedUMKM.isOpen ? "Sedang Buka" : "Tutup"}
                     </span>
                   </div>
@@ -482,14 +560,20 @@ export default function UserDashboard(): JSX.Element {
             <div className="p-6">
               {detailTab === "overview" && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Tentang {selectedUMKM.name}</h3>
-                  <p className="text-gray-700 mb-4">{selectedUMKM.description}</p>
+                  <h3 className="text-lg font-semibold mb-2">
+                    Tentang {selectedUMKM.name}
+                  </h3>
+                  <p className="text-gray-700 mb-4">
+                    {selectedUMKM.description}
+                  </p>
 
                   <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-sky-50 p-4 rounded-lg">
                       <p className="text-sm text-gray-600">Alamat</p>
                       <p className="font-semibold">{selectedUMKM.address}</p>
-                      <p className="text-sm text-sky-600 mt-1">{selectedUMKM.distance} dari lokasi Anda</p>
+                      <p className="text-sm text-sky-600 mt-1">
+                        {selectedUMKM.distance} dari lokasi Anda
+                      </p>
                     </div>
                     <div className="bg-sky-50 p-4 rounded-lg">
                       <p className="text-sm text-gray-600">Telepon</p>
@@ -534,16 +618,25 @@ export default function UserDashboard(): JSX.Element {
 
               {detailTab === "menu" && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Menu / Pilihan Layanan</h3>
+                  <h3 className="text-lg font-semibold mb-4">
+                    Menu / Pilihan Layanan
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedUMKM.menu && selectedUMKM.menu.length > 0 ? (
                       selectedUMKM.menu.map((m, i) => (
-                        <div key={i} className="p-4 bg-white rounded-lg border flex items-center justify-between">
+                        <div
+                          key={i}
+                          className="p-4 bg-white rounded-lg border flex items-center justify-between"
+                        >
                           <div>
                             <p className="font-semibold">{m.name}</p>
-                            {m.price && <p className="text-sm text-gray-500">{m.price}</p>}
+                            {m.price && (
+                              <p className="text-sm text-gray-500">{m.price}</p>
+                            )}
                           </div>
-                          <button className="px-3 py-2 bg-sky-100 rounded-md text-sky-700">Pesan</button>
+                          <button className="px-3 py-2 bg-sky-100 rounded-md text-sky-700">
+                            Pesan
+                          </button>
                         </div>
                       ))
                     ) : (
@@ -561,14 +654,22 @@ export default function UserDashboard(): JSX.Element {
                   <div className="space-y-4">
                     <div className="p-4 bg-white rounded-lg border">
                       <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center">A</div>
+                        <div className="w-10 h-10 bg-sky-100 rounded-full flex items-center justify-center">
+                          A
+                        </div>
                         <div>
                           <div className="flex items-center gap-2">
                             <p className="font-semibold">Andi</p>
-                            <span className="text-sm text-gray-500">• 5 hari lalu</span>
-                            <div className="ml-2 flex items-center"><Star className="w-4 h-4 fill-yellow-400" /></div>
+                            <span className="text-sm text-gray-500">
+                              • 5 hari lalu
+                            </span>
+                            <div className="ml-2 flex items-center">
+                              <Star className="w-4 h-4 fill-yellow-400" />
+                            </div>
                           </div>
-                          <p className="text-gray-700 mt-1">Pelayanan cepat & makanannya enak!</p>
+                          <p className="text-gray-700 mt-1">
+                            Pelayanan cepat & makanannya enak!
+                          </p>
                         </div>
                       </div>
                     </div>
