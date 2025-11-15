@@ -3,8 +3,8 @@ import type { Route } from "./+types/register";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "TemuIn | Login" },
-    { name: "Login", content: "Welcome to TemuIn!" },
+    { title: "TemuIn | Register" },
+    { name: "Register", content: "Welcome to TemuIn!" },
   ];
 }
 

@@ -1,17 +1,20 @@
 import UserDashboard from "~/components/Dashboard/user";
 import type { Route } from "./+types/dashboard-user";
+import ProtectedRoute from "~/components/auth/ProtectedRoute";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "TemuIn | Login" },
-    { name: "Login", content: "Welcome to TemuIn!" },
+    { title: "TemuIn | Dashboard" },
+    { name: "Dashboard-User", content: "Welcome to TemuIn!" },
   ];
 }
 
 export default function Home() {
   return (
     <>
+      <ProtectedRoute>
       <UserDashboard />
+      </ProtectedRoute>
     </>
   );
 }

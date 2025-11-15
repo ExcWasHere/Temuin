@@ -1,10 +1,10 @@
 const umkmPhotos = [
-  { id: 1, image: "umkm1.jpg", name: "UMKM 1" },
-  { id: 2, image: "umkm2.jpg", name: "UMKM 2" },
-  { id: 3, image: "umkm3.jpg", name: "UMKM 3" },
-  { id: 4, image: "umkm4.jpg", name: "UMKM 4" },
-  { id: 5, image: "umkm5.jpg", name: "UMKM 5" },
-  { id: 6, image: "umkm6.jpg", name: "UMKM 6" },
+  { id: 1, image: "/logoUMKM/logoBrewok.jpg", name: "UMKM 1" },
+  { id: 2, image: "/logoUMKM/logoQueenLaundry.png", name: "UMKM 2" },
+  { id: 3, image: "/logoUMKM/logoDpizza.jpg", name: "UMKM 3" },
+  { id: 4, image: "/logoUMKM/logoHamparanRintik.jpg", name: "UMKM 4" },
+  { id: 5, image: "/logoUMKM/logoCrodery.jpg", name: "UMKM 5" },
+  { id: 6, image: "/logoUMKM/logoCoolio.jpg", name: "UMKM 6" },
 ];
 
 export default function IndexHero() {
