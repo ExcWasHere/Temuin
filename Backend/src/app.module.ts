@@ -20,7 +20,7 @@ import { UsersModule } from './users/user.module';
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || 'temuin_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // Set false di production!
+      synchronize: true,
     }),
     AuthModule,
     UsersModule,

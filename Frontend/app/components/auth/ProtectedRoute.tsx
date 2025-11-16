@@ -8,15 +8,13 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     
-    console.log("Token dari localStorage:", token); // Debug log
+    console.log("Token dari localStorage:", token);
     
     if (!token) {
       console.log("Token tidak ada, redirect ke login");
       navigate("/login?unauthorized=1", { replace: true });
       return;
     }
-
-    // Pastikan token di-trim (hapus spasi)
     const cleanToken = token.trim();
     
     fetch("http://localhost:3000/auth/me", {

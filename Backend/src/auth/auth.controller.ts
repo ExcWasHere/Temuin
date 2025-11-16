@@ -32,7 +32,6 @@ export class AuthController {
     return result;
   }
 
-  // Endpoint untuk test - tanpa guard
   @Get('test')
   async test(@Headers('authorization') auth: string) {
     console.log('🧪 [Test] Authorization header:', auth);

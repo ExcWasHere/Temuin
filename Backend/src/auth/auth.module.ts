@@ -5,7 +5,6 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
 
-// Load env vars at module level
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
 const JWT_EXPIRES_IN: number = parseInt(
   process.env.JWT_EXPIRES_IN || '3600',
@@ -23,7 +22,7 @@ console.log('   Expires In:', JWT_EXPIRES_IN);
     JwtModule.register({
       secret: JWT_SECRET,
       signOptions: {
-        expiresIn: JWT_EXPIRES_IN, // number type
+        expiresIn: JWT_EXPIRES_IN,
       },
     }),
   ],
