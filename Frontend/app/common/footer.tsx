@@ -76,7 +76,7 @@ export default function Footer() {
             onClick={handleClick}
           >
             <h2 className="text-2xl font-bold">
-              Sem<span className="text-sky-300">biru</span>
+              Temu<span className="text-sky-300">In</span>
             </h2>
             <ChevronRight
               size={24}
