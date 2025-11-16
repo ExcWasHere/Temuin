@@ -9,14 +9,14 @@ const processList: ProcessProps[] = [
     subtitle: "Mulai dengan mendaftar dan Temuin UMKM sesuai kebutuhanmu.",
   },
   {
-    title: "Lorem",
+    title: "Temuin Kebutuhanmu",
     subtitle:
-      "Lorem",
+      "Gunakan fitur kategori atau pencarian untuk menemukan UMKM terdekat yang sesuai dengan kebutuhanmu.",
   },
   {
-    title: "Lorem",
+    title: "Eksekusi dan Dukung",
     subtitle:
-      "Lorem",
+      "Hubungi UMKM pilihanmu, lakukan transaksi, dan dukung pertumbuhan ekonomi lokal!",
   },
 ];
 
