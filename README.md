@@ -2,7 +2,7 @@
 
 Temuin adalah platform digital yang dirancang untuk membantu pengguna menemukan UMKM terdekat, melihat detail layanan, jadwal operasional, dan informasi bisnis lokal lainnya dengan cepat dan modern. Temuin hadir sebagai jembatan antara masyarakat dan pelaku UMKM untuk memperluas akses digital dan meningkatkan visibilitas usaha.
 
-🌐 **Live Demo:** https://temuin.vercel.app/
+🌐 **Live Demo:** https://temuin-yuk.vercel.app/dashboard
 
 ---
 
