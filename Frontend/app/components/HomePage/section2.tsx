@@ -39,7 +39,7 @@ export default function IndexFeatures() {
                   1
                 </span>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit
+                  Kemudahan Menemukan UMKM Lokal
                 </p>
               </div>
               <div className="flex items-center gap-4">
@@ -47,7 +47,7 @@ export default function IndexFeatures() {
                   2
                 </span>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit
+                  Mendukung Perekonomian Lokal
                 </p>
               </div>
               <div className="flex items-center gap-4">
@@ -55,7 +55,7 @@ export default function IndexFeatures() {
                   3
                 </span>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit
+                  Peningkatan Aksesibilitas
                 </p>
               </div>
             </div>
