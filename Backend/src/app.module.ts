@@ -1,13 +1,17 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
+import { UsersModule } from './users/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST || '127.0.0.1',
@@ -15,11 +19,11 @@ import { User } from './users/user.entity';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || 'temuin_db',
-      entities: [User],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    UsersModule,
     AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}

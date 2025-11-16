@@ -46,7 +46,7 @@ const umkmData: UMKM[] = [
     id: 1,
     name: "Warung Kopi Brewok",
     category: "Makanan & Minuman",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
+    image: "/logoUMKM/logoBrewok.jpg",
     rating: 4.6,
     reviews: 124,
     distance: "0.5 km",
@@ -239,7 +239,7 @@ export default function UserDashboard(): JSX.Element {
             {/* Logo */}
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Store className="w-6 h-6 text-white" />
+                <img src="/favicon.ico" alt="TemuIn" style={{ width: 40, height: 40 }} />
               </div>
               <h1 className="text-2xl font-bold">
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -289,7 +289,7 @@ export default function UserDashboard(): JSX.Element {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
-            Hai, Selamat Datang! 👋
+            Hai, Selamat Datang, {username ?? "Pengguna"}! 👋
           </h2>
           <p className="text-gray-600">
             Temukan UMKM favoritmu di sekitar Malang
