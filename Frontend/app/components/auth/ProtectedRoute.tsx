@@ -7,23 +7,44 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
+    
+    console.log("Token dari localStorage:", token); // Debug log
+    
     if (!token) {
+      console.log("Token tidak ada, redirect ke login");
       navigate("/login?unauthorized=1", { replace: true });
       return;
     }
+
+    // Pastikan token di-trim (hapus spasi)
+    const cleanToken = token.trim();
+    
     fetch("http://localhost:3000/auth/me", {
-      headers: { Authorization: `Bearer ${token}` },
+      method: "GET",
+      headers: { 
+        "Authorization": `Bearer ${cleanToken}`,
+        "Content-Type": "application/json"
+      },
     })
-      .then((res) => {
+      .then(async (res) => {
+        console.log("Response status:", res.status); // Debug log
+        
         if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          console.error("Auth failed:", errorData);
+          
           localStorage.removeItem("access_token");
           localStorage.removeItem("role");
           navigate("/login?unauthorized=1", { replace: true });
           return;
         }
+        
+        const userData = await res.json();
+        console.log("User authenticated:", userData); // Debug log
         setChecking(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("Network error:", err);
         localStorage.removeItem("access_token");
         localStorage.removeItem("role");
         navigate("/login?unauthorized=1", { replace: true });
@@ -32,9 +53,12 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
   if (checking) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="p-4 rounded-lg border bg-white shadow">
-          Memeriksa otentikasi...
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-50 to-purple-50">
+        <div className="p-6 rounded-2xl border bg-white shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-5 h-5 border-2 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-gray-700 font-medium">Memeriksa otentikasi...</span>
+          </div>
         </div>
       </div>
     );

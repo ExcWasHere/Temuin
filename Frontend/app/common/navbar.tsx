@@ -166,9 +166,9 @@ const Navbar: React.FC<HeaderProps> = () => {
         {/* Header */}
         <div className="p-6 flex justify-between items-center bg-white">
           <h1 className="text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Men
+            Temu
             <span className="bg-linear-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">
-              Tora
+              In
             </span>
           </h1>
           <button
