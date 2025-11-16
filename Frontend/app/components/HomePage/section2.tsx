@@ -15,13 +15,13 @@ export default function IndexFeatures() {
           </h1>
         </div>
 
-        {/* Why Choose Sembiru Section */}
+        {/* Why Choose Temuin Section */}
         <div className="mb-20 flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="lg:w-1/2">
             <div className="relative">
               <div className="absolute inset-0 bg-sky-200 rounded-xl transform -rotate-3"></div>
               <img
-                src="Homepage1.jpg"
+                src="favicon.ico"
                 alt="TemuIn Banner"
                 className="relative rounded-xl shadow-xl w-full h-[400px] hover:rotate-1 hover:scale-[1.02] object-cover transform transition-transform duration-300"
               />
@@ -39,7 +39,7 @@ export default function IndexFeatures() {
                   1
                 </span>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit
+                  Kemudahan Menemukan UMKM Lokal
                 </p>
               </div>
               <div className="flex items-center gap-4">
@@ -47,7 +47,7 @@ export default function IndexFeatures() {
                   2
                 </span>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit
+                  Mendukung Perekonomian Lokal
                 </p>
               </div>
               <div className="flex items-center gap-4">
@@ -55,7 +55,7 @@ export default function IndexFeatures() {
                   3
                 </span>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit
+                  Peningkatan Aksesibilitas UMKM
                 </p>
               </div>
             </div>

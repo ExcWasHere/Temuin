@@ -9,14 +9,14 @@ const processList: ProcessProps[] = [
     subtitle: "Mulai dengan mendaftar dan Temuin UMKM sesuai kebutuhanmu.",
   },
   {
-    title: "Lorem",
+    title: "Temuin Kebutuhanmu",
     subtitle:
-      "Lorem",
+      "Gunakan fitur kategori atau pencarian untuk menemukan UMKM terdekat yang sesuai dengan kebutuhanmu.",
   },
   {
-    title: "Lorem",
+    title: "Eksekusi dan Dukung",
     subtitle:
-      "Lorem",
+      "Hubungi UMKM pilihanmu, lakukan transaksi, dan dukung pertumbuhan ekonomi lokal!",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function IndexIntroduction() {
             <div className="relative">
               <div className="absolute inset-0 bg-sky-200 rounded-xl transform rotate-3"></div>
               <img
-                src="Homepage2.jpg"
+                src="/bannerUMKM/banner2.png"
                 alt="TemuIn Illustration"
                 className="relative rounded-xl shadow-xl w-full h-[500px] object-cover transform transition-all duration-300 hover:-rotate-[1deg] hover:scale-[1.02]"
               />

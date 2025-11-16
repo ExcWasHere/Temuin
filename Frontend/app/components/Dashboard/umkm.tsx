@@ -22,7 +22,7 @@ export default function UMKMOwnerDashboard() {
   const [username, setUsername] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const businessData = {
-    name: "Warung Kopi Sederhana",
+    name: "Warung Kopi Samndut",
     category: "Makanan & Minuman",
     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
     rating: 4.8,
@@ -35,8 +35,8 @@ export default function UMKMOwnerDashboard() {
     isOpen: true,
     openingHours: "08:00 - 22:00",
     photos: [
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
-      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400",
+      "/logoUMKM/logoSamndut.jpg",
+      "menuSamndut.jpeg",
       "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400",
     ],
   };
@@ -202,7 +202,7 @@ export default function UMKMOwnerDashboard() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
-            Selamat Datang Kembali! 🎉
+            Hai, Selamat Datang, {username ?? "Pengguna"}! 👋
           </h2>
           <p className="text-gray-600">Kelola bisnis UMKM kamu dengan mudah</p>
         </div>

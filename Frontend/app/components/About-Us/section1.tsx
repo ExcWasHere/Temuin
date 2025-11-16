@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const sponsors = [
-  { id: 1, name: "Indosat", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Indosat_Ooredoo_Hutchison_logo.svg/320px-Indosat_Ooredoo_Hutchison_logo.svg.png" },
-  { id: 2, name: "LINE", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/LINE_New_App_Icon_%282020-12%29.png/240px-LINE_New_App_Icon_%282020-12%29.png" },
-  { id: 3, name: "Lenovo", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Lenovo_logo_2015.svg/320px-Lenovo_logo_2015.svg.png" },
-  { id: 4, name: "Intel", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282006-2020%29.svg/320px-Intel_logo_%282006-2020%29.svg.png" },
-  { id: 5, name: "XL Axiata", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/XL_Axiata_logo_%282018%29.svg/320px-XL_Axiata_logo_%282018%29.svg.png" },
+  { id: 1, name: "LINE", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/LINE_New_App_Icon_%282020-12%29.png/240px-LINE_New_App_Icon_%282020-12%29.png" },
+  { id: 2, name: "Intel", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Intel_logo_%282006-2020%29.svg/320px-Intel_logo_%282006-2020%29.svg.png" },
+  { id: 3, name: "XL Axiata", logo: "xlLogo.svg" },
+  { id: 4, name: "Kasir", logo: "logoKasir.png" },
 ];
 
 export default function AboutUs() {
@@ -47,7 +46,7 @@ export default function AboutUs() {
               <div className="relative">
                 <div className="absolute inset-0 bg-sky-200 rounded-xl transform -rotate-3"></div>
                 <img
-                  src="visi.jpg"
+                  src="/bannerUMKM/banner1.png"
                   alt="Visi TemuIn"
                   className="relative rounded-xl shadow-xl w-full h-[400px] object-cover transform transition-transform duration-300 hover:rotate-1 hover:scale-[1.02]"
                 />
@@ -74,7 +73,7 @@ export default function AboutUs() {
               <div className="relative">
                 <div className="absolute inset-0 bg-sky-200 rounded-xl transform -rotate-3"></div>
                 <img
-                  src="misi.jpg"
+                  src="visiTemuin.png"
                   alt="Misi TemuIn"
                   className="relative rounded-xl shadow-xl w-full h-[400px] object-cover transform transition-transform duration-300 hover:rotate-1 hover:scale-[1.02]"
                 />
