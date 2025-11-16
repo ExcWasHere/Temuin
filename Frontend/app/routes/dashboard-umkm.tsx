@@ -1,5 +1,4 @@
 import type { Route } from "./+types/dashboard-user";
-import ProtectedRoute from "~/components/auth/ProtectedRoute";
 import UMKMOwnerDashboard from "~/components/Dashboard/umkm";
 
 export function meta({}: Route.MetaArgs) {
@@ -12,9 +11,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
-      <ProtectedRoute>
       <UMKMOwnerDashboard />
-      </ProtectedRoute>
     </>
   );
 }

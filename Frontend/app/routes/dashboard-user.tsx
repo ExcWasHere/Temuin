@@ -1,6 +1,5 @@
 import UserDashboard from "~/components/Dashboard/user";
 import type { Route } from "./+types/dashboard-user";
-import ProtectedRoute from "~/components/auth/ProtectedRoute";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,9 +11,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
-      <ProtectedRoute>
       <UserDashboard />
-      </ProtectedRoute>
     </>
   );
 }
